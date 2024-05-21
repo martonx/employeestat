@@ -1,12 +1,15 @@
 ﻿using EmployeeStat;
 
-var employees = await new FileService().GetEmployeesAsync();
+var fileService = new FileService("employees.xml");
+var employees = await fileService.GetEmployeesAsync();
 
 foreach (var employee in employees)
     Console.WriteLine(employee);
 
-var highestPaidEmployee = Calculator.GetHighestPaidEmployee(employees);
+var calculator = new Calculator(employees);
+
+var highestPaidEmployee = calculator.GetHighestPaidEmployee();
 Console.WriteLine($"Legmagsabb fizetése: {highestPaidEmployee}");
 
-var laziestEmployee = Calculator.GetLaziestEmployee(employees);
+var laziestEmployee = calculator.GetLaziestEmployee();
 Console.WriteLine($"Legkevesebb projekje: {laziestEmployee}");

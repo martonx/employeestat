@@ -1,10 +1,17 @@
 ﻿namespace EmployeeStat;
 
-public static class Calculator
+public class Calculator : ICalculator
 {
-    public static Employee GetHighestPaidEmployee(List<Employee> employees) =>
+    private List<Employee> employees;
+
+    public Calculator(List<Employee> employees)
+    {
+        this.employees = employees;
+    }
+
+    public Employee GetHighestPaidEmployee() =>
         employees.MaxBy(employee => employee.TotalSalary);
 
-    public static Employee GetLaziestEmployee(List<Employee> employees) =>
+    public Employee GetLaziestEmployee() =>
         employees.MinBy(employee => employee.Projects.Count);
 }
